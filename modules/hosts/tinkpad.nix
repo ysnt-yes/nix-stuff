@@ -3,9 +3,11 @@
 		modules = [
 			self.nixosModules.tinkpadModule
 			self.nixosModules.defaultSettings
-			# self.nixosModules.firefox
+			self.nixosModules.firefox
 			self.nixosModules.locale
-			./tinkpad-hardware-config.nix
+			self.nixosModules.tinkpadHardwareConfig
+
+			self.nixosModules.yes-user
 		];
 	};
 
@@ -38,15 +40,6 @@
 			pulse.enable = true;
 		};
 
-	users.users.yes = {
-		isNormalUser = true;
-		description = "yes";
-		extraGroups = [ "networkmanager" "wheel" ];
-		packages = with pkgs; [
-			kdePackages.kate
-		];
-	};
-
 	nixpkgs.config.allowUnfree = true;
 
 	environment.systemPackages = with pkgs; [
@@ -60,7 +53,6 @@
 
 	powerManagement.enable = true;
 
-	# programs.firefox.enable = true;
 	system.stateVersion = "25.11";
 
 	};
