@@ -8,6 +8,21 @@
 			self.nixosModules.tinkpadHardwareConfig
 
 			self.nixosModules.yes-user
+			inputs.home-manager.nixosModules.home-manager
+			{
+				home-manager.useGlobalPkgs = true;
+				home-manager.useUserPackages = true;
+				home-manager.users.yes = { imports = [
+					self.homeModules.mainshell
+					{
+						home.username = "yes";
+						home.homeDirectory = "/home/yes";
+						home.stateVersion = "25.11";
+					}
+				];};
+			}
+
+
 		];
 	};
 

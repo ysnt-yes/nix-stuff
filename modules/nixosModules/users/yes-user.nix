@@ -1,8 +1,5 @@
 { inputs, self, ... }: {
   flake.nixosModules.yes-user = { pkgs, ... }: {
-	modules = [
-		self.homeConfigurations.yes
-	];
 
     users.users.yes = {
 		isNormalUser = true;
@@ -11,8 +8,11 @@
 		packages = with pkgs; [
 			kdePackages.kate
 		];
+		shell = pkgs.zsh;
 	};
 
+	programs.zsh.enable = true;
 
-  };
+};
+
 }
